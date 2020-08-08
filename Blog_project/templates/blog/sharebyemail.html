@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% block title_block %}Share Post by Email{% endblock %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            {% if sent %}
+                {% for i in messages %}
+                    <p id="fl">{{ i }}</p>
+                {% endfor %}
+                <center><h6>"{{ post.title }}" information shared by email </h6></center>
+                    <form method="POST" id="ef">
+                        {{ form.as_p }}
+                        {% csrf_token %}
+                        <center>
+                            <input type="submit" value="Send Mail" class="btn btn-primary">
+                        </center>
+                    </form>
+            {% else %}
+                <form method="POST" id="ef">
+                        {{ form.as_p }}
+                        {% csrf_token %}
+                        <center>
+                            <input type="submit" value="Send Mail" class="btn btn-primary">
+                        </center>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+{% endblock %}#}

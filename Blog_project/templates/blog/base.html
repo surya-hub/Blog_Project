@@ -1,0 +1,36 @@
+{% load static %}
+{% load blogs_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title_block %}
+
+        {% endblock %}
+    </title>
+    {% include 'blog/cdnlines.html' %}
+    <link type="text/css" href="{% static 'CSS/blog.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<div class="content">
+    {% block content %}
+
+
+    {% endblock %}
+</div>
+<div class="sidebar">
+    <h3> Surya's Blog</h3><hr>
+    <p> The Totel Number of Posts : <span id="pcount">{% my_tag %}</span></p>
+    <h3>Latest Posts:</h3>{% show_latest_posts %}
+    <h4>Most Commented Posts:</h4>
+    {% get_most_commented_post as most_commented_posts %}
+    <ul>
+        {% for post in most_commented_posts %}
+            <a href="{{ post.get_absolute_url }}"><li>{{ post.title }}</li></a>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
